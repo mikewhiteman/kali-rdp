@@ -1,0 +1,53 @@
+
+{
+    "variables": {
+        "aws_access_key": "{{env `AWS_ACCESS_KEY_ID`}}",
+        "aws_secret_key": "{{env `AWS_SECRET_ACCESS_KEY`}}",
+        "region":         "us-east-1"
+    },
+    "builders": [
+        {
+            "access_key": "{{user `aws_access_key`}}",
+            "vpc_id": "vpc-07e27a8b3638b1b3f",
+            "subnet_id": "subnet-021de55c66cc45ff3",
+            "associate_public_ip_address": true,
+            "ami_name": "kali-linux-aws-new-{{timestamp}}",
+            "launch_block_device_mappings": [
+                {
+                  "delete_on_termination": true,
+                  "device_name": "/dev/sda1",
+                  "volume_size": 20,
+                  "volume_type": "gp2"
+                }
+                ],
+            "instance_type": "t2.medium",
+            "region": "us-east-1",
+            "secret_key": "{{user `aws_secret_key`}}",
+            "source_ami": "ami-01f9e4b812276174b",
+            "ssh_username": "kali",
+            "type": "amazon-ebs",
+            "tags": {
+                "OS_Version": "Kali Linux",
+                "Release": "Latest",
+                "Base_AMI_Name": "{{ .SourceAMIName }}",
+                "Project": "Kali"
+              }
+        }
+    ],
+    "provisioners": [
+        {
+            "type": "shell",
+            "environment_vars": "DEBIAN_FRONTEND=noninteractive",
+            "execute_command": "sudo -S env {{ .Vars }} {{ .Path }}",
+            "inline":[
+                "apt-get update -y",
+                "apt -o Dpkg::Options::='--force-confnew' -q -y full-upgrade",
+                "apt-get install kali-linux-default kali-desktop-xfce xorg xrdp -y",
+                "apt-get autoremove -q -y",
+                "apt-get autoclean -q -y",
+                "sed -i 's/port=3389/port=3390/g' /etc/xrdp/xrdp.ini",
+                "systemctl enable xrdp --now"
+            ]
+        }
+    ]
+}
