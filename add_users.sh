@@ -1,7 +1,9 @@
 #!/bin/bash
 
 ###
-# Generates five user accounts using random passwords. Script is designed to run during deployment (e.g. EC2 user-data) so that users on each Kali box has unique creds. Account details are echo'd to stdout and available in the initial deployment logs. 
+# Generates five user accounts using random passwords 
+# Script is designed to run during deployment (e.g. via EC2 user-data) so that users on each Kali box has unique creds
+# Account details are echo'd to stdout and available in the initial deployment logs (make sure this is an acceptable risk for your setup)
 ###
 
 function rand_pass {
