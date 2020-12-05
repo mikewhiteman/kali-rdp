@@ -1,5 +1,5 @@
 # kali-rdp-packer
-I put this packer template together to build an AMI I could use to quickly Kali EC2 boxes for teams to use during Baruch's CIS4093 final project. This script will generate an up to date Kali AMI w/ RDP configured that you can then deploy in your desired CTF configuration either via AWS GUI, API, Terraform, etc.
+I wrote this packer template to build an AMI I could use to quickly deploy Kali EC2 boxes for Baruch's CIS4093 final project. This script will generate an up to date Kali AMI w/ RDP configured that you can then deploy in your desired CTF configuration either via AWS GUI, API, Terraform, etc.
 
 ## Usage
 1. Define your `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` environment variables
