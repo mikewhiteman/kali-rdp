@@ -1,4 +1,4 @@
-# kali-rdp
+# kali-rdp-packer
 I put this packer template together to build an AMI I could use to quickly Kali EC2 boxes for teams to use during Baruch's CIS4093 final project. This script will generate an up to date Kali AMI w/ RDP configured that you can then deploy in your desired CTF configuration either via AWS GUI, API, Terraform, etc.
 
 ## Usage
